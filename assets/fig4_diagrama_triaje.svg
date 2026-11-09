@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 340" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: 'Liberation Sans', sans-serif; font-size: 15px; font-weight: bold; }
+      .subtitle { font-family: 'Liberation Sans', sans-serif; font-size: 12px; fill: #444444; }
+      .badge { font-family: 'Liberation Sans', sans-serif; font-size: 11px; font-weight: bold; }
+      .arrow { stroke: #1f4e79; stroke-width: 2.5; fill: none; marker-end: url(#arrowhead); }
+      .arrow-green { stroke: #2e7d32; stroke-width: 2.5; fill: none; marker-end: url(#arrowhead-green); }
+      .arrow-orange { stroke: #e65100; stroke-width: 2.5; fill: none; marker-end: url(#arrowhead-orange); }
+      .arrow-red { stroke: #c62828; stroke-width: 2.5; fill: none; marker-end: url(#arrowhead-red); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#1f4e79" />
+    </marker>
+    <marker id="arrowhead-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2e7d32" />
+    </marker>
+    <marker id="arrowhead-orange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#e65100" />
+    </marker>
+    <marker id="arrowhead-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#c62828" />
+    </marker>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="920" height="340" fill="#ffffff" rx="10" />
+
+  <!-- Box 1: Input Transaction -->
+  <g transform="translate(20, 115)">
+    <rect width="180" height="100" rx="8" fill="#f0f4f8" stroke="#1f4e79" stroke-width="2" />
+    <text x="90" y="38" text-anchor="middle" class="title" fill="#1f4e79">Transacción</text>
+    <text x="90" y="58" text-anchor="middle" class="title" fill="#1f4e79">Entrante</text>
+    <text x="90" y="82" text-anchor="middle" class="subtitle">(Monto, Time, V1-V28)</text>
+  </g>
+
+  <!-- Arrow 1 to Model -->
+  <path d="M 200 165 L 260 165" class="arrow" />
+
+  <!-- Box 2: Preprocessing & Random Forest -->
+  <g transform="translate(265, 85)">
+    <rect width="230" height="160" rx="8" fill="#e8eaf6" stroke="#303f9f" stroke-width="2" />
+    <text x="115" y="32" text-anchor="middle" class="title" fill="#1a237e">Motor de Inferencia</text>
+    <text x="115" y="55" text-anchor="middle" class="subtitle">• RobustScaler (Amount)</text>
+    <text x="115" y="75" text-anchor="middle" class="subtitle">• Hour_Sin / Hour_Cos</text>
+    <line x1="20" y1="90" x2="210" y2="90" stroke="#c5cae9" stroke-width="1.5" />
+    <text x="115" y="112" text-anchor="middle" class="title" fill="#283593">Random Forest</text>
+    <text x="115" y="132" text-anchor="middle" class="subtitle">100 Estimadores · Depth 12</text>
+    <text x="115" y="148" text-anchor="middle" class="badge" fill="#303f9f">Cálculo de P(Fraude) ∈ [0, 1]</text>
+  </g>
+
+  <!-- Arrows from Model to 3 Tiers -->
+  <path d="M 495 130 C 535 130, 535 55, 570 55" class="arrow-green" />
+  <path d="M 495 165 L 570 165" class="arrow-orange" />
+  <path d="M 495 200 C 535 200, 535 275, 570 275" class="arrow-red" />
+
+  <!-- Tier 1: Auto-Approval -->
+  <g transform="translate(575, 15)">
+    <rect width="320" height="80" rx="8" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2" />
+    <text x="20" y="30" class="title" fill="#1b5e20">Nivel 1: Aprobación Instantánea</text>
+    <text x="20" y="50" class="subtitle"><tspan font-weight="bold">Regla:</tspan> P &lt; 0.2600 (U1)</text>
+    <text x="20" y="68" class="badge" fill="#2e7d32">Volumen Test: 56,865 (99.83%) · Costo Operativo: $0</text>
+  </g>
+
+  <!-- Tier 2: Manual Review -->
+  <g transform="translate(575, 125)">
+    <rect width="320" height="80" rx="8" fill="#fff3e0" stroke="#e65100" stroke-width="2" />
+    <text x="20" y="30" class="title" fill="#bf360c">Nivel 2: Cola de Revisión Manual</text>
+    <text x="20" y="50" class="subtitle"><tspan font-weight="bold">Regla:</tspan> 0.2600 ≤ P &lt; 0.3100 (U2)</text>
+    <text x="20" y="68" class="badge" fill="#e65100">Volumen Test: 2 transacciones · Costo: $10 USD</text>
+  </g>
+
+  <!-- Tier 3: Auto-Block -->
+  <g transform="translate(575, 235)">
+    <rect width="320" height="80" rx="8" fill="#ffebee" stroke="#c62828" stroke-width="2" />
+    <text x="20" y="30" class="title" fill="#b71c1c">Nivel 3: Bloqueo Automático</text>
+    <text x="20" y="50" class="subtitle"><tspan font-weight="bold">Regla:</tspan> P ≥ 0.3100 (Riesgo Crítico)</text>
+    <text x="20" y="68" class="badge" fill="#c62828">Volumen Test: 95 transacciones · 80 fraudes detenidos</text>
+  </g>
+</svg>
