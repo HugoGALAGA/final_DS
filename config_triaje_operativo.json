@@ -1,0 +1,10 @@
+{
+    "modelo_seleccionado": "Random Forest Classifier (100 estimators, max_depth=12)",
+    "umbral_u1_aprobar_vs_revisar": 0.25999999999999995,
+    "umbral_u2_revisar_vs_bloquear": 0.31,
+    "pr_auc_test": 0.8623928978504118,
+    "costo_financiero_total_usd": 1895.7199999999998,
+    "ahorro_neto_usd": 8809.210000000001,
+    "transacciones_test_evaluadas": 56962,
+    "porcentaje_automatizacion": 99.82971103542712
+}
